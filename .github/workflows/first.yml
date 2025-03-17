@@ -12,9 +12,9 @@ jobs:
           node-version: 18
       - name: install dependencies
         run: npm install ci
-      - name: run lint
+      - name: run run lint
         run: npm lint
       - name: run tests
-        run: npm test
+        run: npm run test
       - name: deploy
         run: echo "Deploying"
