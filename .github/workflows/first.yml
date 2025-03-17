@@ -1,0 +1,20 @@
+name: First task
+on: push
+jobs:
+  testanddeploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: lint
+        uses: actions/checkout@v3
+      - name: setup node js
+        uses: setup-node
+        with:
+          node-version: 18
+      - name: install dependencies
+        run: npm install ci
+      - name: run lint
+        run: npm lint
+      - name: run tests
+        run: npm test
+      - name: deploy
+        run: echo "Deploying"
