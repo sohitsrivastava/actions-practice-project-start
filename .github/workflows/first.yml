@@ -7,7 +7,7 @@ jobs:
       - name: lint
         uses: actions/checkout@v3
       - name: setup node js
-        uses: setup-node
+        uses: actions/setup-node
         with:
           node-version: 18
       - name: install dependencies
