@@ -1,7 +1,7 @@
 name: First task
 on: push
 jobs:
-  testanddeploy:
+  test:
     runs-on: ubuntu-latest
     steps:
       - name: lint
@@ -16,5 +16,11 @@ jobs:
         run: npm run lint
       - name: run tests
         run: npm run test
+  deploy:
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
       - name: deploy
         run: echo "Deploying"
