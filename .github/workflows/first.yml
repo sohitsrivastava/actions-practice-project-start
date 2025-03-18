@@ -2,7 +2,7 @@ name: First task
 on:
   push:
     branches:
-      - main
+      - master
       - 'feature-*'
     paths-ignore:
       - ".github/workflows/*"
@@ -10,7 +10,7 @@ on:
     types:
       - opened
     branches:
-      - main
+      - master
 jobs:
   lint:
     runs-on: ubuntu-latest
