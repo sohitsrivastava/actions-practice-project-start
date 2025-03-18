@@ -7,4 +7,4 @@ jobs:
       - name: checkout
         uses: actions/checkout@v3
       - name: deploy
-        run: echo "${{ github.issue }}"
+        run: echo "${{ toJSON(github.event) }}"
