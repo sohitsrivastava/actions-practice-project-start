@@ -50,7 +50,6 @@ jobs:
         run: |
           echo "DB URL: ${{ vars.DB_URL }}"
           echo "ARTIFACT NAME: ${{ secrets.ARTIFCATNAME }}"
-      -
   checkEnvRepo:
     runs-on: ubuntu-latest
     steps:
