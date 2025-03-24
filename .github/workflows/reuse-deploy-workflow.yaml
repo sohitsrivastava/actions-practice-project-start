@@ -67,7 +67,7 @@ jobs:
           echo "ARTIFACT NAME: ${{ secrets.ARTIFCATNAME }}"
           echo "ARTIFACT NAME: ${{ env.ARTIFACT_NAME }}"
   deploy:
-    needs: [test, lint]
+    needs: [build, lint]
     uses: "./.github/workflows/deploy-workflow.yaml"
     with:
       artifact-name: dist-files
