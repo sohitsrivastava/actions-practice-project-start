@@ -5,7 +5,5 @@ jobs:
     runs-on: ubuntu-latest
     needs: [ test, lint ]
     steps:
-      - name: checkout
-        uses: actions/checkout@v3
       - name: deploy
         run: echo "Deploying"
