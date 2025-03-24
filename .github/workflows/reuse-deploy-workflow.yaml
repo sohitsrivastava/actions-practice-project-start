@@ -78,4 +78,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: output result
-        run: echo ${{ needs.deploy.outputs.result  }}
+        run: echo "${{ needs.deploy.outputs.result }}"
