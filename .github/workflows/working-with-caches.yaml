@@ -40,7 +40,7 @@ jobs:
           path: ./node_modules
           key: cached-node-modules-${{ hashFiles('**/package-lock.json') }}
       - name: install dependencies
-        if: steps.cache-node.cache-hit != 'true'
+        if: steps.cache-node.outputs.cache-hit != 'true'
         run: npm install ci
   lint:
     needs: setupjobscache
@@ -64,7 +64,7 @@ jobs:
           path: ./node_modules
           key: cached-node-modules-${{ hashFiles('**/package-lock.json') }}
       - name: install dependencies
-        if: steps.cache-node.cache-hit != 'true'
+        if: steps.cache-node.outputs.cache-hit != 'true'
         run: npm install ci
       - name: run lint
         run: npm run lint
@@ -86,7 +86,7 @@ jobs:
           path: ./node_modules
           key: cached-node-modules-${{ hashFiles('**/package-lock.json') }}
       - name: install dependencies
-        if: steps.cache-node.cache-hit != 'true'
+        if: steps.cache-node.outputs.cache-hit != 'true'
         run: npm install ci
       - name: run tests
         id: run-test
