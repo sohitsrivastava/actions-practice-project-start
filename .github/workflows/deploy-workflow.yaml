@@ -1,4 +1,4 @@
-name: Matrix task
+name: Deploy task
 on: workflow_call
 jobs:
   deploy:

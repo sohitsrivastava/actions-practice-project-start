@@ -1,4 +1,4 @@
-name: Check continue-on-error
+name: Check reusable
 on:
   push:
     branches:
