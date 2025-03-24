@@ -1,0 +1,30 @@
+name: First task
+on:
+  push:
+    branches:
+      - master
+jobs:
+  lint:
+    strategy:
+      matrix:
+        node-version: [12, 14, 16]
+        os-type: [windows-latest, ubuntu-latest]
+        include:
+          - node-version: 18
+            os-type: ubuntu-latest
+        excludes:
+          - os-type: windows-latest
+            node-version: 12
+    runs-on: ${{ matrix.os-type }}
+    steps:
+      - name: lint
+        uses: actions/checkout@v3
+      - name: setup node js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: install dependencies
+        run: npm install ci
+      - name: run lint
+        run: npm run lint
+
