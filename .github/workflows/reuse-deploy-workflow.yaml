@@ -67,7 +67,6 @@ jobs:
           echo "ARTIFACT NAME: ${{ secrets.ARTIFCATNAME }}"
           echo "ARTIFACT NAME: ${{ env.ARTIFACT_NAME }}"
   deploy:
-    id: deploy
     needs: [test, lint]
     uses: "./.github/workflows/deploy-workflow.yaml"
     with:
@@ -79,4 +78,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: output result
-        run: echo ${{ steps.deploy.outputs.result  }}
+        run: echo ${{ jobs.deploy.outputs.result  }}
