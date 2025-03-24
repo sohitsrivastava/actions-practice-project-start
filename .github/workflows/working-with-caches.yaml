@@ -106,4 +106,4 @@ jobs:
         with:
           name: test-report
       - name: deploy
-        run: echo "Deploying"
+        run: echo "Deploying Artifact"
