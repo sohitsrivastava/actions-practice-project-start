@@ -24,6 +24,7 @@ jobs:
       - name: install dependencies
         run: npm install ci
   lint:
+    needs: setupjobscache
     runs-on: ubuntu-latest
     environment: PRD
     steps:
@@ -47,6 +48,7 @@ jobs:
       - name: run lint
         run: npm run lint
   test:
+    needs: setupjobscache
     runs-on: ubuntu-latest
     environment: DEV
     steps:
