@@ -42,7 +42,7 @@ jobs:
         run: npm run test
       - name: upload test results
         if: steps.run-test.outcome == 'failure'
-        uses: actions/upload-artifacts@v3
+        uses: actions/upload-artifact@v3
         with:
           name: test-report
           path: test.json
@@ -50,6 +50,7 @@ jobs:
         run: |
           echo "DB URL: ${{ vars.DB_URL }}"
           echo "ARTIFACT NAME: ${{ secrets.ARTIFCATNAME }}"
+      -
   checkEnvRepo:
     runs-on: ubuntu-latest
     steps:
@@ -73,5 +74,9 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@v3
+      - name: Get Artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: test-report
       - name: deploy
         run: echo "Deploying"
