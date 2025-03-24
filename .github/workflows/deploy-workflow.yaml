@@ -9,8 +9,8 @@ on:
         type: string
     outputs:
       result:
-      descript: output
-      value: ${{ jobs.deploy.outputs.outcome }}
+        description: output
+        value: ${{ jobs.deploy.outputs.outcome }}
     secrets:
 #      some-secret:
 #        description: some secret
