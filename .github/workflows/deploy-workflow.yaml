@@ -1,8 +1,27 @@
 name: Deploy task
-on: workflow_call
+on:
+  workflow_call:
+    inputs:
+      artifact-name:
+        description: Name of the artifact
+        required: false
+        default: dist
+        type: string
+    outputs:
+      result: ${{ jobs.deploy.outputs.outcome }}
+    secrets:
+#      some-secret:
+#        description: some secret
+#        required: false
 jobs:
   deploy:
+    outputs:
+      outcome: ${{ steps.set-output.outputs.set-result }}
     runs-on: ubuntu-latest
     steps:
       - name: deploy
+        id: deploy
         run: echo "Deploying"
+      - name: set output
+        id: set-output
+        run: echo "set-result=${{ steps.deploy.outcome }}" >> $GITHUB_OUTPUT

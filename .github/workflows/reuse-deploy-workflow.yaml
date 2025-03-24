@@ -25,7 +25,7 @@ jobs:
         run: npm install ci
       - name: run lint
         run: npm run lint
-  test:
+  build:
     runs-on: ubuntu-latest
     environment: DEV
     steps:
@@ -37,16 +37,14 @@ jobs:
           node-version: 18
       - name: install dependencies
         run: npm install ci
-      - name: run tests
-        continue-on-error: true
-        id: run-test
-        run: npm run test
-      - name: upload test results
-        #if: failure() && steps.run-test.outcome == 'failure'
+      - name: run build
+        id: run-build
+        run: npm run build
+      - name: upload artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: test-report
-          path: test.json
+          name: dist-files
+          path: dist
       - name: check DEV environment
         run: |
           echo "DB URL: ${{ vars.DB_URL }}"
@@ -69,5 +67,16 @@ jobs:
           echo "ARTIFACT NAME: ${{ secrets.ARTIFCATNAME }}"
           echo "ARTIFACT NAME: ${{ env.ARTIFACT_NAME }}"
   deploy:
+    id: deploy
     needs: [test, lint]
     uses: "./.github/workflows/deploy-workflow.yaml"
+    with:
+      artifact-name: dist-files
+#    secrets:
+#      some-secret: ${{ secrets.some-secret }}
+  output-result-of-deploy:
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: output result
+        run: echo ${{ steps.deploy.outputs.result  }}
