@@ -75,4 +75,4 @@ jobs:
       - name: checkout
         uses: actions/checkout@v3
       - name: Deploy
-        uses: ".github/workflows/deploy-workflow.yaml"
+        uses: "./.github/workflows/deploy-workflow.yaml"
