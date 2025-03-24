@@ -1,10 +1,8 @@
-name: Check Environments
+name: Check continue-on-error
 on:
   push:
     branches:
       - master
-    paths-ignore:
-      - ".github/workflows/*"
 env:
   DB_URL: 'mydb-url:5000'
   ARTIFACT_NAME: ${{ secrets.ARTIFCATNAME }}
@@ -40,7 +38,15 @@ jobs:
       - name: install dependencies
         run: npm install ci
       - name: run tests
+        continue-on-error: true
+        id: run-test
         run: npm run test
+      - name: upload test results
+        #if: failure() && steps.run-test.outcome == 'failure'
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-report
+          path: test.json
       - name: check DEV environment
         run: |
           echo "DB URL: ${{ vars.DB_URL }}"
@@ -66,7 +72,5 @@ jobs:
     runs-on: ubuntu-latest
     needs: [test, lint]
     steps:
-      - name: checkout
-        uses: actions/checkout@v3
-      - name: deploy
-        run: echo "Deploying"
+      - name: Deploy
+        uses: "./.github/workflows/deploy-workflow.yaml"
