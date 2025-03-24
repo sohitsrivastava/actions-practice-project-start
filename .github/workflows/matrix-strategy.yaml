@@ -1,4 +1,4 @@
-name: First task
+name: Matrix task
 on:
   push:
     branches:
